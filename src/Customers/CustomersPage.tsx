@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Row } from "antd";
+import { Card, Col, Row } from "antd";
 
 import CustomerTypeSelection from "./CustomerTypeSelection";
 import CustomersList from "./CustomersList";
@@ -19,6 +19,8 @@ const CustomersPage = () => {
     const result = await getZellerCustomers();
     setCustomers(result);
   };
+
+  // Filter customers based on selected type
   useEffect(() => {
     const filteredData = customers.filter(
       (customer: Customer) =>
@@ -34,14 +36,16 @@ const CustomersPage = () => {
   return (
     <Row gutter={[16, 16]}>
       <Col sm={24} md={{ span: 12, offset: 6 }} style={{ padding: 20 }}>
-        <CustomerTypeSelection
-          handleCustomerTypeChange={handleCustomerTypeChange}
-          selectedCustomerType={selectedCustomerType}
-        />
-        <CustomersList
-          customers={filteredCustomers}
-          customerType={selectedCustomerType}
-        />
+        <Card>
+          <CustomerTypeSelection
+            handleCustomerTypeChange={handleCustomerTypeChange}
+            selectedCustomerType={selectedCustomerType}
+          />
+          <CustomersList
+            customers={filteredCustomers}
+            customerType={selectedCustomerType}
+          />
+        </Card>
       </Col>
     </Row>
   );

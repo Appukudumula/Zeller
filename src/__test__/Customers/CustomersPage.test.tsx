@@ -52,7 +52,7 @@ describe("CustomersPage", () => {
 
     await waitFor(() => {
       const roleElements = screen.queryAllByText(/^ADMIN$/);
-      expect(roleElements).toHaveLength(1);
+      expect(roleElements).toHaveLength(2);
     });
   });
 

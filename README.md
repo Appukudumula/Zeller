@@ -1,3 +1,19 @@
+# Getting started with Zeller
+
+## Prerequisites
+
+1. Node JS
+
+## Set up
+
+1. Clone the repo to your local environment.
+2. Install the all required packages by executing command `npm install` in the root folder
+
+## Run
+
+1. Execute `npm start` command in the root folder to start the local server.
+2. Execute `npm test` command in the root folder to execute unit tests.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
