@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 
 import CustomerTypeSelection from "./CustomerTypeSelection";
@@ -12,32 +12,24 @@ const CustomersPage = () => {
   const [selectedCustomerType, setSelectedCustomerType] =
     useState<CustomerType>(CustomerType.Admin);
 
-  const filterCustomers = (
-    curCustomers: Customer[],
-    curCustomerType: CustomerType
-  ) => {
-    const filteredData = curCustomers.filter(
+  const handleCustomerTypeChange = (value: CustomerType) =>
+    setSelectedCustomerType(value);
+
+  const fetchCustomers = async () => {
+    const result = await getZellerCustomers();
+    setCustomers(result);
+  };
+  useEffect(() => {
+    const filteredData = customers.filter(
       (customer: Customer) =>
-        customer.role.toLowerCase() === curCustomerType.toLowerCase()
+        customer.role.toLowerCase() === selectedCustomerType.toLowerCase()
     );
     setFilteredCustomers(filteredData);
-  };
-
-  const handleCustomerTypeChange = (value: CustomerType) => {
-    setSelectedCustomerType(value);
-    filterCustomers(customers, value);
-  };
-
-  const fetchCustomers = useCallback(async () => {
-    const result = await getZellerCustomers();
-    console.log("result", result);
-    setCustomers(result);
-    filterCustomers(result, selectedCustomerType);
-  }, []);
+  }, [customers, selectedCustomerType]);
 
   useEffect(() => {
     fetchCustomers();
-  }, [fetchCustomers]);
+  }, []);
 
   return (
     <Row gutter={[16, 16]}>
